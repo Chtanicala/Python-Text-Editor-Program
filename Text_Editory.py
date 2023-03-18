@@ -17,7 +17,7 @@ def new_file():
 
 def open_file():
     file = askopenfilename(defaultextension=".txt", 
-                           file=[{("All Files","*.*"), ("Text Documents", "*.txt")}])
+                           file=[("All Files","*.*"), ("Text Documents", "*.txt")])
 
     try:
         window.title(os.path.basename(file))
@@ -34,7 +34,23 @@ def open_file():
         file.close
 
 def save_file():
-    pass
+    file = filedialog.asksaveasfilename(initialfile="Untitled.txt",
+                                        defaultextension=".txt",
+                                        filetypes=[("All Files","*.*"), ("Text Documents", "*.txt")])
+    if file is None:
+        return
+    else:
+        try:
+            window.title(os.path.basename(file))
+            file = open(file, "w")
+
+            file.write(text_area.get(1.0,END))
+
+        except Exception:
+            print("Couldn't Save File")
+        
+        finally:
+            file.close
 
 def cut():
     text_area.event_generate("<<Cut>>")
