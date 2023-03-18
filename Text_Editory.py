@@ -21,16 +21,16 @@ def save_file():
     pass
 
 def cut():
-    pass
+    text_area.event_generate("<<Cut>>")
 
 def copy():
-    pass
+    text_area.event_generate("<<Copy>>")
 
 def paste():
-    pass
+    text_area.event_generate("<<Paste>>")
 
 def about():
-    pass
+    showinfo("About this program", "This is a program written by Christian tanicala")
 
 def quit():
     window.destroy
