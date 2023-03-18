@@ -54,6 +54,8 @@ font_size.set("25")
 
 text_area = Text(window, font=(font_name.get(), font_size.get()))
 scroll_bar = Scrollbar(text_area)
+scroll_bar.pack(side=RIGHT,fill=Y)
+text_area.config(yscrollcommand=scroll_bar.set)
 
 window.grid_rowconfigure(0,weight=1)
 window.grid_columnconfigure(0,weight=1)
@@ -67,11 +69,29 @@ color_button.grid(row=0,column=0)
 
 font_box = OptionMenu(frame, font_name, *font.families(),command=change_font)
 font_box.grid(row=0, column=1)
-
 size_box = Spinbox(frame, from_=1, to=100, textvariable=font_size,command=change_font)
 size_box.grid(row=0,column=2)
 
-scroll_bar.pack(side=RIGHT,fill=Y)
-text_area.config(yscrollcommand=scroll_bar.set)
+menu_bar = Menu(window)
+window.config(menu=menu_bar)
+
+file_menu = Menu(menu_bar, tearoff=0)
+menu_bar.add_cascade(label="File",menu=file_menu)
+file_menu.add_command(label="New",command=new_file)
+file_menu.add_command(label="Open",command=open_file)
+file_menu.add_command(label="Save",command=save_file)
+file_menu.add_separator()
+file_menu.add_command(label="Exit",command=quit)
+
+edit_menu = Menu(menu_bar,tearoff=0)
+menu_bar.add_cascade(label="Edit",menu=edit_menu)
+edit_menu.add_command(label="Cut", command=cut)
+edit_menu.add_command(label="Copy", command=copy)
+edit_menu.add_command(label="Paste", command=paste)
+
+help_menu = Menu(menu_bar, tearoff=0)
+menu_bar.add_cascade(label="Help",menu=help_menu)
+help_menu.add_command(label="About", command=about)
+
 
 window.mainloop()
