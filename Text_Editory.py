@@ -33,7 +33,7 @@ def about():
     pass
 
 def quit():
-    pass
+    window.destroy
 
 window = Tk()
 window.title('Text Editor Program')
